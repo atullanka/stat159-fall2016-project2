@@ -1,6 +1,9 @@
 #This script will pre-model the data
 #specifically make the data ready to be dealt with glmnet() function
 
+#load the data
+credit <- read.csv("data/Credit.csv")
+
 #first transform each categorical variable into dummy variables
 
 # dummy out categorical variables
