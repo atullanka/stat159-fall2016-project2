@@ -1,5 +1,8 @@
 #this code creates a random ordered vector consisting of 300 trues and 100 falses
 
+#read in credit data to eventually make a training and test set from it
+credit <- read.csv("data/scaled-credit.csv")
+
 set.seed (1)
 
 #train set will be size 300
@@ -12,9 +15,13 @@ train <- sample(vec, replace = FALSE)
 #test set is the rest of 100 observations
 test <- (! train )
 
+#create the training and test set from the data itself
+training_set <- credit[train,]
+
+test_set <- credit[test,]
+
 #store train and test data in an Rdata file
 #this data will be used everytime we build a model
-
-save(train, test, file = "data/train_test.RData")
+save(training_set, test_set, file = "data/train_test.RData")
 
 
