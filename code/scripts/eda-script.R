@@ -45,9 +45,6 @@ png(file = "../../images/histogram-balance.png")
 hist(credit.quant$Balance, main = "Bank Balance Distribution", xlab = "Balance", col = "blue")
 dev.off()
 
-<<<<<<< HEAD
-#Boxplots
-=======
 #Boxplots
 png(file = "../../images/boxplot-income.png")
 boxplot(credit.quant$Income, main = "Income Distribution", 
@@ -83,4 +80,4 @@ png(file = "../../images/boxplot-balance.png")
 boxplot(credit.quant$Balance, main = "Balance Distribution", 
         xlab = "Balance (in dollars)", horizontal = T)
 dev.off()
->>>>>>> 9591ed7be1d053271e90627a2502969e898cbb9f
+
