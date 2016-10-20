@@ -45,4 +45,42 @@ png(file = "../../images/histogram-balance.png")
 hist(credit.quant$Balance, main = "Bank Balance Distribution", xlab = "Balance", col = "blue")
 dev.off()
 
+<<<<<<< HEAD
 #Boxplots
+=======
+#Boxplots
+png(file = "../../images/boxplot-income.png")
+boxplot(credit.quant$Income, main = "Income Distribution", 
+        xlab = "Income (in thousands of dollars)", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-limit.png")
+boxplot(credit.quant$Limit, main = "Limit Distribution", 
+        xlab = "Limit", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-rating.png")
+boxplot(credit.quant$Limit, main = "Rating Distribution", 
+        xlab = "Rating", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-cards.png")
+boxplot(credit.quant$Cards, main = "Credit Card Distribution", 
+        xlab = "Cards", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-age.png")
+boxplot(credit.quant$Age, main = "Age Distribution", 
+        xlab = "Age", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-education.png")
+boxplot(credit.quant$Education, main = "Education Distribution", 
+        xlab = "Limit", horizontal = T)
+dev.off()
+
+png(file = "../../images/boxplot-balance.png")
+boxplot(credit.quant$Balance, main = "Balance Distribution", 
+        xlab = "Balance (in dollars)", horizontal = T)
+dev.off()
+>>>>>>> 9591ed7be1d053271e90627a2502969e898cbb9f
