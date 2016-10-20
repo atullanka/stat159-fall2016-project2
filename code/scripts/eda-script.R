@@ -1,0 +1,1 @@
+credit <- read.csv('Credit.csv')
