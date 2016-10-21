@@ -1,0 +1,1 @@
+#this script will run a ridge regression
