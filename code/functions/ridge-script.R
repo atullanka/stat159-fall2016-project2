@@ -13,6 +13,8 @@ load("data/train_test.RData")
 
 #ONLY WORK ON TRAINING SET FOR NOW
 
+#WHAT SHOULD MY X AND Y BE???
+
 #create an x and y for glmnet() to input
 x = as.matrix(training_set) 
 
@@ -26,19 +28,25 @@ grid = 10^seq(10, -2, length = 100)
 #create ridge object using glmnet and grid for lambda arguemnet
 #alpha =0 ensures that ridge is used
 #Do i need intercept = FALSE
-ridge_models = glmnet(x,y, alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
+
+#ridge_models = glmnet(x,y, alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
 
 
-cv.out = cv.glmnet (x,y,alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
+cv_ridge_models = cv.glmnet (x,y,alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
 
-best_lamda =cv.out$lambda.min
+best_lamda = cv_ridge_models$lambda.min
 
+print(best_lamda)
 
-save(best_lamda, ridge_models, file = "data/ridge_regression.RData")
+save(best_lamda, cv_ridge_models, file = "data/ridge_regression.RData")
 
 
 #plot cv.glmnet output
 png("images/ridge_plots.png")
-plot(cv.out)
+plot(cv_ridge_models)
 dev.off()
+
+
+#STILL NEED TO DO STEPS 5 AND 6
+
 
