@@ -18,10 +18,10 @@ test <- (! train )
 #create the training and test set from the data itself
 training_set <- credit[train,]
 
-test_set <- credit[test,]
+test_set <- as.numeric(unlist(credit[test,]))
 
 #store train and test data in an Rdata file
 #this data will be used everytime we build a model
-save(training_set, test_set, file = "data/train_test.RData")
+save(training_set, test_set, train, test, file = "data/train_test.RData")
 
 
