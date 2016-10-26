@@ -1,45 +1,38 @@
 #this script will run a ridge regression
+
+#load necessary libraries and variables
 library (glmnet)
-
-set.seed (1)
-
-
-#load scaled-credit data
-credit <- read.csv("data/scaled-credit.csv")
-
 #load my train and testing data set
 load("data/train_test.RData")
-#the variables in this file are training_set, test_set, train, test
+#load scaled-credit data
+scaled_credit <- read.csv("data/scaled-credit.csv")
+scaled_credit$X <- NULL
 
-#ONLY WORK ON TRAINING SET FOR NOW
+set.seed (12345)
 
-#WHAT SHOULD MY X AND Y BE???
+#FIGURED OUT THINGS
 
 #create an x and y for glmnet() to input
-x = as.matrix(training_set) 
+x <- as.matrix(train_set[, -12]) 
+#create a vector of lables aka the predictors to be used in the regression analaysis
+#y <- as.double(train_set$train_set[0,2:12 ]) 
 
-#just look at Age for now
-y = as.double(training_set$Age) 
+y <- as.double(train_set$Balance)
 
 #ridge regression utilizes a variable lambda which can vary in size, so we make a vector modeling this
+grid <- 10^seq(10, -2, length = 100)
 
-grid = 10^seq(10, -2, length = 100)
 
 #create ridge object using glmnet and grid for lambda arguemnet
 #alpha =0 ensures that ridge is used
-#Do i need intercept = FALSE
+cv_ridge_models <- cv.glmnet (x,y,alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
 
-#ridge_models = glmnet(x,y, alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
+#save the output for lambda
+lamda_min_ridge <- cv_ridge_models$lambda.min
+cv_ridge_coef <- coef(cv_ridge_models, s = lamda_min_ridge)
 
 
-cv_ridge_models = cv.glmnet (x,y,alpha =0, lambda = grid, standardize = FALSE, intercept = FALSE)
-
-best_lamda = cv_ridge_models$lambda.min
-
-print(best_lamda)
-
-save(best_lamda, cv_ridge_models, file = "data/ridge_regression.RData")
-
+#create tables with predictors and best lambdas
 
 #plot cv.glmnet output
 png("images/ridge_plots.png")
