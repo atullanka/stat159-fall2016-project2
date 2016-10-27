@@ -24,4 +24,3 @@ test_set <- as.numeric(unlist(credit[test,]))
 #this data will be used everytime we build a model
 
 save(train_set, test_set, file = "data/train_test.RData")
-
