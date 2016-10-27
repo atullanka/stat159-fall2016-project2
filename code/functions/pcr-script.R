@@ -3,7 +3,7 @@
 # Load necessary libraries and variables
 library (pls)
 # Load my train and testing data set
-load("data/train_test.RData")
+load('data/train_test.RData')
 # Load scaled-credit data
 scaled_credit <- read.csv("data/scaled-credit.csv")
 scaled_credit$X <- NULL
@@ -18,27 +18,27 @@ set.seed (72838)
 cv_pcr <- pcr(Balance ~ ., data = train_set, validation = 'CV')
 	 
 # Find min lambda
-lambda_min_pc <- min(cv_pc$validation$PRESS)
+lambda_min_pc <- which.min(cv_pcr$validation$PRESS)
 
 # Plot pcr regression
 png('images/pcr_plot.png')
-validationplot(cv_pc, val.type = 'MSEP')
+validationplot(cv_pcr, val.type = 'MSEP')
 dev.off()
 
 # Calculate MSE
-pc_predict <- predict(cv_pc, ncomp = lambda_min_pc, newdata = test_set)
+pc_predict <- predict(cv_pcr, ncomp = lambda_min_pc, newdata = test_set)
 pc_MSE <- mean((pc_predict - test_set$Balance)^2)
 
 # Re-Fit the Model on the Full Data Set and use best lambda from above
-pc_fit <- pcr(Balance ~ ., data = scaled_credit, ncomp = lambda_min_pc )
-pc_coef_full <- coef(pc_fit)
+pc_full <- pcr(Balance ~ ., data = scaled_credit, ncomp = lambda_min_pc, validation = 'CV')
+pc_coef_full <- coef(pc_full)
 	 
 # Save Data and Generate an informative Output in txt file
-save(lambda_min_pc, cv_pc, pc_MSE, pc_coef_full,file = 'data/RData-files/pc-regression.RData')
+save(lambda_min_pc, cv_pcr, pc_MSE, pc_coef_full,file = 'data/pc-regression.RData')
 	 
-sink('data/outputs/pc-regression-output.txt')
+sink('data/pc-regression-output.txt')
 cat('Output of PCR with 10-fold CV on the Full Data Set\n')
-print(summary(cv_pc))
+print(summary(cv_pcr))
 cat('\nMinimum Lambda for PCR\n')
 print(lambda_min_pc)
 cat('\nPCR MSE of Test Data Set\n')
