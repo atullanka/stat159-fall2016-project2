@@ -1,14 +1,12 @@
 library(pls)
-scaled_data <- read.csv("data/datasets/scaled-credit.csv")[, -1]
-training_data <- read.csv("data/datasets/training-credit.csv")[, -1]
-test_data <- read.csv("data/datasets/test-credit.csv")[, -1]
+load(../../data/train_test.RData)
+scaled_data <- read.csv("../../data/scaled-credit.csv")[, -1]
 
-set.seed(1234)
-test_x = model.matrix(Balance ~ ., test_data)[,-1]
-test_y = test_data$Balance
+test_x = model.matrix(Balance ~ ., test_set)[,-1]
+test_y = test_set$Balance
 
 # Perform ten-fold cross validation on the training data
-pls_fit = plsr(Balance ~ ., data=training_data,scale=TRUE, validation="CV")
+pls_fit = plsr(Balance ~ ., data=train_set,scale=TRUE, validation="CV")
 
 # Find the number of components that yields the lowest MSEP
 comp = which.min(pls_fit$validation$PRESS)
