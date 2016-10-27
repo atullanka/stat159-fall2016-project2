@@ -3,7 +3,7 @@
 #read in credit data to eventually make a training and test set from it
 credit <- read.csv("data/scaled-credit.csv")
 
-set.seed (1)
+set.seed (1982)
 
 #train set will be size 300
 true <- !logical(300)
@@ -22,6 +22,10 @@ test_set <- credit[test,]
 
 #store train and test data in an Rdata file
 #this data will be used everytime we build a model
+<<<<<<< HEAD
 save(train_set, test_set, file = "data/train_test.RData")
+=======
+save(train_set, test_set, train, test, file = "data/train_test.RData")
+>>>>>>> 0eb513f9b503acc5323a1c89abc9f7dfb09de474
 
 
