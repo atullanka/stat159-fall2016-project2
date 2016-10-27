@@ -3,7 +3,7 @@
 #read in credit data to eventually make a training and test set from it
 credit <- read.csv("data/scaled-credit.csv")
 
-set.seed (1)
+set.seed (1982)
 
 #train set will be size 300
 true <- !logical(300)
