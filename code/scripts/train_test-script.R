@@ -22,10 +22,6 @@ test_set <- credit[test,]
 
 #store train and test data in an Rdata file
 #this data will be used everytime we build a model
-<<<<<<< HEAD
-=======
-save(train_set, test_set, train, test, file = "data/train_test.RData")
 
->>>>>>> ridge
 
 save(train_set, test_set, file = "data/train_test.RData")
