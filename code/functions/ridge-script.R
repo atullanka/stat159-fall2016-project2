@@ -37,8 +37,8 @@ dev.off()
 
 # Calculate MSE
 ridge_matrix_test <- as.matrix(test_set[ ,-12])
-ridge_predit <- predict(cv_ridge_models,ridge_matrix_test, s = lambda_min_ridge)
-ridge_MSE <- mean((ridge_preditct - test_set$Balance)^2)
+ridge_predict <- predict(cv_ridge_models,ridge_matrix_test, s = lambda_min_ridge)
+ridge_MSE <- mean((ridge_predict - test_set$Balance)^2)
 
 # Re-Fit the Model on the Full Data Set and use best lambda from above
 full_credit <- as.matrix(scaled_credit[ ,-12])
