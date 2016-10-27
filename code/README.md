@@ -21,6 +21,8 @@ The script, **ridge-script.R**, performs a ridge regression on the data, credit.
 
 \sum_{i=1}^{10} t_i
 
+We can write fractions: $\frac{2}{3}$. We can also handle things like estimated population growth rate, e.g., $\hat{\lambda}=1.02$. And, $\sqrt{4}=2$.
+
 
 {math: latex}
 ```
