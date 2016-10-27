@@ -1,0 +1,8 @@
+load("/Users/atullanka/Documents/stat159-fall2016-project2/data/train_test.RData")
+ls
+ls()
+test_set
+train_set
+ls()
+test_set
+train_set
