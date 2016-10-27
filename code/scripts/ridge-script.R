@@ -39,22 +39,26 @@ ridge_predict <- predict(cv_ridge_models,ridge_matrix_test, s = lambda_min_ridge
 ridge_MSE <- mean((ridge_predict - test_set$Balance)^2)
 
 # Re-Fit the Model on the Full Data Set and use best lambda from above
+
+# Create new x and y variables
 full_credit <- as.matrix(scaled_credit[ ,-12])
-ridge_fit <- glmnet(x = full_credit, y = scaled_credit$Balance, lambda = lambda_min_ridge,
-                    intercept = FALSE, standardize = FALSE, alpha = 0)
+y_full <- scaled_credit$Balance
+
+ridge_fit <- glmnet(x = full_credit, y = y_full, lambda = lambda_min_ridge,
+	standardize = FALSE, intercept = FALSE, alpha = 0)
 ridge_coef_full <- coef(ridge_fit, s = lambda_min_ridge)
 
-# Save Data and Generate an informative Output in txt file
+# Save data in an Rdata file to be loaded later in the project
 save(lambda_min_ridge, cv_ridge_models, ridge_MSE, ridge_coef_full,file = 'data/ridge-regression.RData')
 
-
+# Save useful statstics(and labels!) in a text file, to be used in report 
 sink('data/ridge-regression-output.txt')
 cat('Output of Ridge Regression with 10-fold CV on the Full Data Set\n')
 print(ridge_fit)
-cat('\nMinimum Lambda\n')
-print(lambda_min_ridge)
 cat('\nRidge MSE of Test Data Set\n')
 print(ridge_MSE)
-cat('\nCoefficients of using Ridge Regression Model on Full Data Set\n')
+cat('\nMinimum Lambda\n')
+print(lambda_min_ridge)
+cat('\nCoefficients for Ridge Regression Model on Full Data Set\n')
 print(ridge_coef_full)
 sink()
