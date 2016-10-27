@@ -7,19 +7,19 @@ Number of components considered: 13
 VALIDATION: RMSEP
 Cross-validated using 10 random segments.
        (Intercept)  1 comps  2 comps  3 comps  4 comps  5 comps  6 comps
-CV          0.9611   0.9654   0.6329   0.6339   0.6298   0.6255   0.6264
-adjCV       0.9611   0.9650   0.6315   0.6332   0.6245   0.6272   0.6273
+CV          0.9611   0.6408   0.6326   0.6333   0.6236   0.6078   0.5753
+adjCV       0.9611   0.6395   0.6316   0.6326   0.6316   0.6131   0.5680
        7 comps  8 comps  9 comps  10 comps  11 comps  12 comps  13 comps
-CV      0.5860   0.5699   0.5631    0.5649    0.2159    0.2156    0.2161
-adjCV   0.5835   0.5690   0.5622    0.5640    0.2155    0.2151    0.2155
+CV      0.5706   0.5662   0.5661    0.5684    0.2160    0.2156    0.2159
+adjCV   0.5689   0.5647   0.5651    0.5676    0.2155    0.2151    0.2152
 
 TRAINING: % variance explained
-           1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps
-X        9.992e+01    99.94    99.95    99.96    99.97    99.98    99.98
-Balance  1.860e-05    57.71    58.06    59.65    59.82    60.49    65.61
-         8 comps  9 comps  10 comps  11 comps  12 comps  13 comps
-X          99.99    99.99       100    100.00    100.00    100.00
-Balance    67.23    67.92        68     95.32     95.36     95.36
+         1 comps  2 comps  3 comps  4 comps  5 comps  6 comps  7 comps  8 comps
+X          21.15    37.15    49.46    57.93    66.29    74.29    82.00    88.63
+Balance    56.64    57.96    58.26    58.48    60.53    66.11    66.95    67.73
+         9 comps  10 comps  11 comps  12 comps  13 comps
+X          94.63     97.81     99.98    100.00    100.00
+Balance    67.73     67.83     95.32     95.36     95.37
 NULL
 
 Minimum Lambda for PCR
