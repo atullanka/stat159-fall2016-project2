@@ -24,3 +24,6 @@ In the script we read in the proper data sets and Rdata files. Then we create a 
 ###Lasso Regression
 
 ###Principal Components Regression
+The script *pcr-script.R* performs a principal components regression(PCR) on the data, credit. PCR is a dimension reduction method. The PCR approach involves constructing principal components regression the first M principal components, Z1, . . ., ZM, and then using these components as the predictors in a linear regression model that is fit using least squares. The key idea is that often a small number of principal components suffice to explain most of the variability in the data, as well as the relationship with the response. 
+
+In the script we read in the proper data sets and Rdata files. Then we create a cross validation using pcr which performs 10-fold cross-validation, produces a plot, and returns a value for lambda. We then find the best lambda and save the output plot(using *validationplot()*). Finally, we calculate the MSE using the training and test sets and peform PCR on the full data set. All prevalanet data is saved in a text file in the data folder.
