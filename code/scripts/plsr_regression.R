@@ -35,5 +35,5 @@ pander(coeff)
 cat("\nTest MSE:\n")
 mse
 cat("\nBest Number of Components:\n")
-comp
+min.comp
 sink()
