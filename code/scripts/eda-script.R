@@ -1,4 +1,5 @@
 credit <- read.csv("data/Credit.csv")
+library(plyr)
 
 #For simplicity, a smaller dataset that contains all the quantitative variables will be used instead of the entire dataset
 credit.quant <- credit[c(2,3,4,5,6,7,12)]
