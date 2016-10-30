@@ -12,6 +12,8 @@ train_y = train_set$Balance
 lasso.grid = 10^seq(10,-2,length=100)
 
 lasso_mod = glmnet(train_x, train_y, alpha=1, lambda= lasso.grid)
+
+#Cross-Validation
 cv_out = cv.glmnet(train_x, train_y, alpha=1, 
                    intercept=FALSE, standardize=FALSE, lambda= lasso.grid)
 
@@ -30,7 +32,7 @@ lasso_predict = predict(lasso_mod, s = best_lambda, newx=test_x)
 test_mse = mean((lasso_predict-test_y)^2)
 
 # Refit the lasso model on the whole data set
-lasso_out = glmnet(scaled_x, scaled_y, alpha=1, lambda=lasso.grid)
+lasso_out = glmnet(scaled_x, scaled_y, alpha=1, lambda=best_lambda)
 
 # Determine the coefficients given the best value of lambda
 lasso_coef = predict(lasso_out,type="coefficients",s=best_lambda)[1:12,]
