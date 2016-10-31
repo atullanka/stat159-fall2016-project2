@@ -16,7 +16,7 @@ We created 5 different scripts for running various regression methods: Ordinary 
 We just use lm fnc
 
 ###Ridge Regression
-The script, **ridge-script.R**, performs a ridge regression on the data, credit. Ridge regression is a shrinkage method. "Ridge regression is very similar to least squares, except that the coefficients ridge are estimated by minimizing a slightly different quantity. In particular, the regression ridge regression coefficient estimates βˆR are the values that minimize."<sup>1</sup>
+The script, **ridge-script.R**, performs a ridge regression on the data, credit. Ridge regression is a shrinkage method. "Ridge regression is very similar to least squares, except that the coefficients ridge are estimated by minimizing a slightly different quantity. In particular, the regression ridge regression coefficient estimates βˆ<sup>R</sup> are the values that minimize."<sup>1</sup>
 
 In the script we read in the proper data sets and Rdata files. Then we create a cross validation using cv.glmnet which performs k-fold(here k=10 by default) cross-validation for glmnet, produces a plot, and returns a value for lambda. We then find the best lambda and save the output plot. Finally, we calculate the MSE using the training and test sets and peform ridge regression on the full data set. All prevalanet data is saved in a text file in the data folder.
 
