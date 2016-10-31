@@ -1,8 +1,11 @@
 ---
-title: "Abstract"
+title: "Project 2"
 author: ""
 date: ""
 output: 
-  pdf_document:
- ---
+  html_document:
+    fig_height: 3
+    fig_width: 5
+---
+
 This is my abstract
