@@ -1,4 +1,4 @@
-.PHONY: data tests eda regressions report clean all
+.PHONY: data eda regressions report clean all
 
 all: eda regressions report
 
@@ -9,7 +9,7 @@ eda:
 	Rscript code/scripts/eda-script.R
 
 ols:
-	#need a ols script
+	Rscript code/scripts/ols_regression.R
 
 ridge: 
 	Rscript code/script/ridge-script.R
@@ -23,8 +23,11 @@ pcr:
 plsr:
 	Rscript code/scripts/plsr_regression.R
 
+session-info:
+	Rscript code/scripts/session.info.R
+
 regressions:
-	#make ols
+	make ols
 	make ridge
 	make lasso
 	make pcr
@@ -43,9 +46,4 @@ session:
 
 clean: 
 	rm -f report/report.pdf
-
-
-	
-
-clean: 
 

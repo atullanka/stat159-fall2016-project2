@@ -1,4 +1,5 @@
 credit <- read.csv("data/Credit.csv")
+library(plyr)
 
 #For simplicity, a smaller dataset that contains all the quantitative variables will be used instead of the entire dataset
 credit.quant <- credit[c(2,3,4,5,6,7,12)]
@@ -89,14 +90,14 @@ dev.off()
 qual.var = colnames(credit)[8:11]
 credit.qual = credit[qual.var]
 # Gender
-gender.Table = count(credit, 'Gender')
-gender.Table$RelativeFreq = genderTable$freq / sum(genderTable$freq)
+genderTable = count(credit, 'Gender')
+genderTable$RelativeFreq = genderTable$freq / sum(genderTable$freq)
 colnames(genderTable)[2] = 'Frequency'
-sink('data/frequencyTable-gender.txt')
+sink('../../data/frequencyTable-gender.txt')
 genderTable
 sink()
-save(genderTable, file = 'data/frequencyTable-gender.RData')
-png('images/barchart-gender.png')
+save(genderTable, file = '../../data/frequencyTable-gender.RData')
+png('../../images/barchart-gender.png')
 barplot(table(credit$Gender), main = 'Barplot of Gender', xlab = 'Gender')
 dev.off()
 
@@ -104,79 +105,79 @@ dev.off()
 studentTable = count(credit, 'Student')
 studentTable$RelativeFrequency = studentTable$freq / sum(studentTable$freq)
 colnames(studentTable)[2] = 'Frequency'
-sink('data/frequencyTable-student.txt')
+sink('../../data/frequencyTable-student.txt')
 studentTable
 sink()
-save(studentTable, file = 'data/frequencyTable-student.RData')
-png('images/barchart-student.png')
+save(studentTable, file = '../../data/frequencyTable-student.RData')
+png('../../images/barchart-student.png')
 barplot(table(credit$Student), main = 'Barplot of Student', xlab = 'Student')
 dev.off()
 # Married
 marriedTable = count(credit, 'Married')
 marriedTable$RelativeFrequency = marriedTable$freq / sum(marriedTable$freq)
 colnames(marriedTable)[2] = 'Frequency'
-sink('data/frequencyTable-married.txt')
+sink('../../data/frequencyTable-married.txt')
 marriedTable
 sink()
-save(marriedTable, file = 'data/frequencyTable-married.RData')
-png('images/barchart-married.png')
+save(marriedTable, file = '../../data/frequencyTable-married.RData')
+png('../../images/barchart-married.png')
 barplot(table(credit$Married), main = 'Barplot of Marital Status', xlab = 'Marital Status')
 dev.off()
 # Ethnicity
 ethnicityTable = count(credit, 'Ethnicity')
 ethnicityTable$RelativeFrequency = ethnicityTable$freq / sum(ethnicityTable$freq)
 colnames(ethnicityTable)[2] = 'Frequency'
-sink('data/frequencyTable-ethnicity.txt')
+sink('../../data/frequencyTable-ethnicity.txt')
 ethnicityTable
 sink()
-save(ethnicityTable, file = 'data/frequencyTable-ethnicity.RData')
-png('images/barchart-ethnicity.png')
+save(ethnicityTable, file = '../../data/frequencyTable-ethnicity.RData')
+png('../../images/barchart-ethnicity.png')
 barplot(table(credit$Ethnicity), main = 'Barplot of Ethnicity', xlab = 'Ethnicity')
 dev.off()
 
 # Association between Balance and the predictors
 # Matrix of Correlations among all quantitative variables:
-creditQuantitative = credit[quantitativeVariables]
-correlationMatrix = cor(creditQuantitative)
-sink('data/eda-correlationMatrix.txt')
+correlationMatrix = cor(credit.quant)
+sink('../../data/eda-correlationMatrix.txt')
 correlationMatrix
 sink()
-save(correlationMatrix, file = 'data/correlation-matrix.RData')
+save(correlationMatrix, file = '../../data/correlation-matrix.RData')
 #Scatterplot Matrix
-png('images/scatterplot-matrix.png')
-pairs(~Income+Limit+Rating+Cards+Age+Education+Balance, data = creditQuantitative, main = 'Simple Scatterplot Matrix', cex = 0.8)
+png('../../images/scatterplot-matrix.png')
+pairs(~Income+Limit+Rating+Cards+Age+Education+Balance, data = credit.quant, main = 'Simple Scatterplot Matrix', cex = 0.8)
 dev.off()
 
 # Anova between Balance and all the qualitative variables
 options(contrasts = c("contr.helmert", "contr.poly"))
-anovaQualitative = aov(Balance~Gender+Student+Married+Ethnicity, data = creditQualitative)
-save(anovaQualitative, file = 'eda-anovaQualitative.RData')
+anovaQualitative = aov(credit$Balance~credit$Gender+credit$Student+credit$Married+credit$Ethnicity, 
+                       data = credit.qual)
+save(anovaQualitative, file = '../../data/eda-anovaQualitative.RData')
 
 # Conditional boxplots between Balance and the qualitative variables
 # On gender
 balanceMale = credit$Balance[credit$Gender != 'Female']
 balanceFemale = credit$Balance[credit$Gender == 'Female']
-png('images/boxplot-balanceConditionalOnGender.png')
+png('../../images/boxplot-balanceConditionalOnGender.png')
 boxplot(balanceMale, balanceFemale, names = c('Male', 'Female'), main = 'Boxplot of Balance Conditioned on Gender')
 dev.off()
 
 # On student
 balanceStudent = credit$Balance[credit$Student == 'Yes']
 balanceNonStudent = credit$Balance[credit$Student == 'No']
-png('images/boxplot-balanceConditionalOnStudent.png')
+png('../../images/boxplot-balanceConditionalOnStudent.png')
 boxplot(balanceStudent, balanceNonStudent, names = c('Student', 'Non-Student'), main = 'Boxplot of Balance Conditioned on Student')
 dev.off()
 # On marital status
 balanceMarried = credit$Balance[credit$Married == 'Yes']
 balanceSingle = credit$Balance[credit$Married == 'No']
-png('images/boxplot-balanceConditionalOnMarried.png')
+png('../../images/boxplot-balanceConditionalOnMarried.png')
 boxplot(balanceMarried, balanceSingle, names = c('Married', 'Single'), main = 'Boxplot of Balance Conditioned on Marital Status')
 dev.off()
 # On ethnicity
 balanceCaucasian = credit$Balance[credit$Ethnicity == 'Caucasian']
 balanceAA = credit$Balance[credit$Ethnicity == 'African American']
 balanceAsian = credit$Balance[credit$Ethnicity == 'Asian']
-png('images/boxplot-balanceConditionalOnEthnicity.png')
+png('../../images/boxplot-balanceConditionalOnEthnicity.png')
 boxplot(balanceCaucasian, balanceAA, balanceAsian, names = c('Caucasian', 'African American', 'Asian'), main = 'Boxplot of Balance Conditioned on Ethnicity')
 dev.off()
 
