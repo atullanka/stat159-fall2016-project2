@@ -1,18 +1,21 @@
 ---
-title: "Abstract"
-author: ""
-date: ""
-output: 
-  pdf_document:
- ---
-
-
-
-This is my abstract---
 title: "Project 2"
 author: ""
 date: ""
 output: 
-  pdf_document:
+  html_document:
+    fig_height: 3
+    fig_width: 5
 ---
+
+This is my abstract
 This is my intro....hopefully it is after my abstract.
+data stuffff
+
+
+methods stufffff
+analysis....need to read the book for this
+results...what happened??
+
+
+what can we take from this??
