@@ -3,11 +3,11 @@ title: "Predictive Modeling Process"
 author: "Atul Lanka, Rushil Sheth"
 date: "November 4th, 2016"
 output: 
-  html_document:
+  pdf_document:
     fig_height: 3
     fig_width: 5
 ---
 
 # Abstract
 
-This project is based on the data set and statistical concepts introduced in Chapter 6, **Linear Model Selection and Regularization**, from "An Introduction to Statistical Learning" (by James et al.). The primary objective is to perform mulitple predictive modeling processes applied to the data set *Credit*, as well as learn about the relationship between `Balance` and the rest of the quantitative and qualitative variables. The five models considered are *Ordinary Least Squares*, *Ridge Regression (RR)*, *Lasso Regression (LR)*, *Principal Components Regression (PCR)*, and *Partial Least Squares REgression (PLSR)*. Using cross-validation, the most ideal model is evaluated from their respective Minimum Square Erros on the test sets.
+This project is based on the data set and statistical concepts introduced in Chapter 6, **Linear Model Selection and Regularization**, from "An Introduction to Statistical Learning" (by James et al.). The primary objective is to perform mulitple predictive modeling processes applied to the data set *Credit*, as well as learn about the relationship between `Balance` and the rest of the quantitative and qualitative variables. The five models considered are *Ordinary Least Squares*, *Ridge Regression (RR)*, *Lasso Regression (LR)*, *Principal Components Regression (PCR)*, and *Partial Least Squares REgression (PLSR)*. Using cross-validation, the most ideal model is evaluated from their respective Minimum Square Errors on the test sets.
