@@ -1,2 +1,4 @@
 
-This is my intro....hopefully it is after my abstract.
+# Introduction
+
+The primary purpose of this report is to determine the best model for predicting `Balance` given the ten different predictors, both quantitative and qualitative. The distributions of these variables will be examined through summaries and plots, and five aforementioned regression models will be applied to the data (*Ridge Regression (RR)*, *Lasso Regression (LR)*, *Principal Components Regression (PCR)*, and *Partial Least Squares REgression (PLSR)*). The means of comparing and analyzing five models will be by studying their respective coefficients and  mean squared errors (MSE) calculated from the 10-fold cross-validation. 
