@@ -1,4 +1,3 @@
+# Methods
 
-
-
-methods stufffff
+$latex \alpha $
