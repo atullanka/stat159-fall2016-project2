@@ -1,4 +1,4 @@
-.PHONY: data eda regressions report clean all
+.PHONY: data eda regressions report shiny clean all 
 
 all: eda regressions report
 
@@ -43,6 +43,9 @@ slides:
 
 session:
 	Rscript code/scripts/session-info-script.R
+
+shiny:
+	R -e "shiny::runApp('shiny/app.R')"
 
 clean: 
 	rm -f report/report.pdf
