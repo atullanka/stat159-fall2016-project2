@@ -31,5 +31,5 @@ We also create various text files containing summary statistics for each respect
 
 * plsr_regression.txt
 
-
 Finally, **train_test.Rdata** contains the training and testing data sets for the regression models. The training data contains 300 elements and the testing data contains 100 elements. The elements of each set are randomized and meant to be reproducible since we set the seed in the script, which produced the 2 sets. The different use of these two sets will be explained in the next section.
+
