@@ -6,6 +6,9 @@ The primary data set for this project is *Credit.csv*, ( [this link](http://www-
 ##Scaled Credit data set
 The csv file **scaled-credit.csv** is a standardized version of the original credit data set. We do this because *glmnet()*, the function we will use for ridge and lasso regressions, does not take factors as data. Next we perform mean centering and standardizing(mean zero and sd is one) because we want to have comparable scales to prevent favoritism for certain coefficients.
 
+##Train and Test Data
+**train_test.Rdata** contains the training and testing data sets for the regression models. The training data contains 300 elements and the testing data contains 100 elements. The elements of each set are randomized and meant to be reproducible since we set the seed in the script, which produced the 2 sets.
+
 ##Regression data files
 Each regression method creates a text file with pertinent data and an Rdata file to be loaded into RMD files.
 
