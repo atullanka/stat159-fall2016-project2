@@ -7,7 +7,7 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 
 * code: This folder contains our Rscripts for the various regression models as well as session info, exploratory data script and a script for creating our training and testing data.
 
-* data: This folder contains our main and scaled data set. It also includes the Rdata and txt files created by our various methods.
+* data: This folder contains our main and scaled data set. It also includes the Rdata and text files created by our various methods.
 
 * images: This folder contains our 
 
@@ -28,19 +28,21 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 
 **How to reproduce our project**:
 
-1. First clone our project. Open your terminal and type 'git clone https://github.com/atullanka/stat159-fall2016-project2.git'
+1. First clone our project. Open your terminal and type `git clone https://github.com/atullanka/stat159-fall2016-project2.git`
 
-2. Remove our most recent report which is inlcuded in repo. To do this type 'make clean'
+2. Remove our most recent report which is inlcuded in repo. To do this type `make clean`
 
 3. Next, run the various scripts in order to have the most up to date data: NOT SURE THE ORDER OF COMMANDS
 
-4. Now you can generate the report! Type the command 'make report'
+4. Now you can generate the report! Type the command `make report`
 
-5. And now you can run 'make slides' and generate the slides.
+5. And now you can run `make slides` and generate the slides.
 
-6. Finally if you want an interactive view of the different regression models you can run 'make shiny' 
-	a. A command similar to 'Listening on http://127.0.0.1:6800' should show up.
+6. Finally if you want an interactive view of the different regression models you can run `make shiny`
+	a. A command similar to `Listening on http://127.0.0.1:6800` should show up.
+
 	b. Copy the URL into a browser.
+
 	c. After you are done using the Slidy App type "ctrl +c" on terminal to exit R
 
 
