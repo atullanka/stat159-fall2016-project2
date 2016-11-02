@@ -39,6 +39,7 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 5. And now you can run `make slides` and generate the slides.
 
 6. Finally if you want an interactive view of the different regression models you can run `make shiny`
+
 	a. A command similar to `Listening on http://127.0.0.1:6800` should show up.
 
 	b. Copy the URL into a browser.
