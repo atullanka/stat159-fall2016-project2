@@ -41,9 +41,13 @@ output: ioslides_presentation
 - calculate MSE using testing set
 - Perform regression on full data set
 
+## Ridge Regression Image
+- add figure
+
 ## Lasso Regression
 - also a shrinkage method
 - same exact process as ridge, except in cv.glmnet, set alpha = 1
+- add figure 
 
 ## PCR
 - dimension reduction method
@@ -53,9 +57,14 @@ output: ioslides_presentation
 - Calculate MSE using the testing set
 - Perform regression on full data set
 
+## PCR image
+-add PCR image
+
 ## PLSR
 - another dimension reduction method
 - same process as PCR, but we use plsr() isntead of pcr()
+- add PLSR image
 
 # Results
+- compare models
 
