@@ -1,4 +1,4 @@
-sink('session-info.txt')
+sink('session-info.txt', append = TRUE)
 library(xtable)
 library(rmarkdown)
 library(knitr)
