@@ -54,7 +54,7 @@ load('../../data/pc-regression.RData')
 print(pcr_MSE)
 ```
 
-The resulting mean square error for the same test set is given above. The 0.05143916 is slightly higher than the the OLS Regression's 0.04468304, but lower than Lasso. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+The resulting mean square error for the same test set is given above. The 0.05198999 is slightly higher than the the OLS Regression's 0.04468304, but lower than Lasso. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
 
 ## Partial Least Squares Regression (PLSR)
 From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 4$ component are used. Therefore, we compute the test MSE:
@@ -66,4 +66,4 @@ print(mse)
 
 The resulting mean square error for the same test set is given above: 0.05173802 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
 
-So, apart from the OLS Regression's MSE, the PC regression's MSE is the smallest from the 4 other methods. 
+So, apart from the OLS Regression's MSE, the PLSR regression's MSE is the smallest from the 4 other methods. 

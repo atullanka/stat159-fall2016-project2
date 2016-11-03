@@ -1,2 +1,28 @@
 
-results...what happened??
+# Results
+
+# 5: Results
+
+In this section we compare the Lasso Regression with Ridge Regression and the Principal Components Regression with Partial Least Squares Regression.
+  
+## LR and RR
+    Below are the analogous plots for LR and RR. These plots compare log(lambda) values to MSEP.
+
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../../images/ridge_plots.png")
+knitr::include_graphics("../../images/Lasso_regression_MSE.png")
+``` 
+
+The lambda values in LR and RR determine to what extent the Ridge and Lasso Regression models shrink the effect of regression coefficients. This shrinkage subsequently influences the MSEP errors as seen in the plots. We can note that lasso regression works best with very small lambda values (breaks in the plot) while ridge regression increases in error gradually (continuity). Since Lasso only uses a subset of the coefficient vector while Ridge does not, Lasso involves fewer predictive elements and so a larger tuning (lambda) values would more heavily influence the prediction, and thus the MSE.   
+    
+## PCR and PLSR
+
+    Below are the plots for cross-validation for PCR and PLSR. They compare the number of components used to the cross-validation MSE (MSEP). 
+    
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../../images/pcr_plot.png")
+knitr::include_graphics("../../images/plsr_regression_validationplot.png")
+``` 
+
+#######How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error  since the lines are further apart for PCR. However, overall, PLSR appears to minimize error (MSEP) using fewer components than does PCR, and the MSE is actually larger. The tradeoff between PCR and PLSR is that PLSR requires fewer components to attain a low error, but it is thus more uncertain when applied to different data sets.
+    

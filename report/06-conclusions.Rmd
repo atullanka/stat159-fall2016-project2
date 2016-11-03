@@ -1,4 +1,4 @@
 
+# Conclusions
 
-
-what can we take from this??
+The primary goal of this project was to develop regression methods for minimizing MSE on the data sets. Each regression model would optimize the MSE differently. While PCR and PSLR are more heavily rooted in components, LR and RR also distinguish each other through subsetting the predictive elements used for modeling. Overall, from the results, we see that the ordinary least squares regression model attains the lowest mean squared error overall, and the partial least squares regression model yields the lowest MSE of the 4 other regression models. Therefore we conclude that the ordinary least squares model is still the most accurate predictor for Balance from the 10 predictors.
