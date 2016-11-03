@@ -1,2 +1,69 @@
 
-analysis....need to read the book for this
+# Analysis
+
+In the section,we first generate training and test sets of data, randomization seed establishment, parameter choosing via cross-validation and model fitting for each of the methods in order to study the accuracy of fit for each model
+
+## Exploratory Data Analysis
+To look at the basic statistical distributions and summaries of all the variables, the folder `Data` contains all the `.Rdata` and `.txt` files created from the R scripts. Furthermore, relevant plots such as histograms, boxplots, barplots, and conditional boxplots are created that can be accessed in the `Images` folder. Finally, the ANOVA tests were performed using the `aov()` function.
+
+## Pre-modeling Data Processing
+Two major processing steps are done before the models are created:
+
+1. Converting the factors into dummy variables:
+    
+    Transforming the categorizal variables into dummy variables in order to use the built-in function *glmnet* to fit the data.
+    
+2. Mean centering and standardization
+    
+    By doing so, we make sure that the coefficients would function properly and in an equivalent manner
+    
+## Ordinary Least Squares Regression (OLS)
+```{r,echo=FALSE,message=FALSE}
+load('../../data/OLS_regression.RData')
+print(ols_mse)
+```
+We first fit the Ordinary Least Squares Regression model to the data set, with no parameters to be tuned. The mean square error of the OLS model on the test set is shown above: 0.04468304. We use this as a reference point when comparing with other prediction models.
+
+## Ridge Regression (RR)
+```{r,echo=FALSE,message=FALSE}
+load('../../data/ridge-regression.RData')
+print(lambda_min_ridge)
+print(ridge_MSE)
+```
+
+From the graph above, we choose the best $\lambda$ given this traning set, which is 0.01 and applied it to the entire data set
+
+The resulting mean square error for the same test set is given above. The #####0.04611172 does show an improvment compared to the OLS Regression's 0.04468304.
+
+## Lasso Regression (LR)
+```{r,echo=FALSE,message=FALSE}
+load('../../data/lasso.RData')
+print(best_lambda)
+print(test_mse)
+```
+
+From the graph above, we choose the best $\lambda$ given this traning set, which is also 0.01 and applied it to the entire data set.
+
+The resulting mean square error for the same test set is given above. The 0.05406075 does show a slight deterioration compared to the OLS Regression's 0.04468304.
+
+## Principal Components Regression (PCR)
+From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 11$ component are used. Therefore, we compute the test MSE:
+
+```{r,echo=FALSE, message=FALSE}
+load('../../data/pc-regression.RData')
+print(pcr_MSE)
+```
+
+The resulting mean square error for the same test set is given above. The 0.05143916 is slightly higher than the the OLS Regression's 0.04468304, but lower than Lasso. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+
+## Partial Least Squares Regression (PLSR)
+From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 4$ component are used. Therefore, we compute the test MSE:
+
+```{r,echo=FALSE, message=FALSE}
+load('../../data/plsr_regression.RData')
+print(mse)
+```
+
+The resulting mean square error for the same test set is given above: 0.05173802 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+
+So, apart from the OLS Regression's MSE, the PC regression's MSE is the smallest from the 4 other methods. 
