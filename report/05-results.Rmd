@@ -5,7 +5,7 @@
 
 In this section we compare the Lasso Regression with Ridge Regression and the Principal Components Regression with Partial Least Squares Regression.
   
-## LR and RR
+## Lasso and Ridge Regression
     Below are the analogous plots for LR and RR. These plots compare log(lambda) values to MSEP.
 
 ```{r,echo=FALSE,fig.align='center'}
@@ -17,7 +17,7 @@ The lambda values in LR and RR determine to what extent the Ridge and Lasso Regr
     
 ## PCR and PLSR
 
-    Below are the plots for cross-validation for PCR and PLSR. They compare the number of components used to the cross-validation MSE (MSEP). 
+Below are the plots for cross-validation for PCR and PLSR. They compare the number of components used to the cross-validation MSE (MSEP). 
     
 ```{r,echo=FALSE,fig.align='center'}
 knitr::include_graphics("../../images/pcr_plot.png")
