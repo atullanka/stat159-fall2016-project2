@@ -30,7 +30,7 @@ Our next two methods, Principal Components(PCR) and Partial Least Squares regres
 
 3. Run `pcr()` or `plsr()` depending on which model you want, and use arguements `Balance ~ .`, `data=train_set`, `validation = CV` and `scale = TRUE`.
 
-4. We decide the best model using `which.min(PCR/PLSR_model$validation$PRESS)` where `MODEL` is the name of the pcr or plsr model depending on the script.
+4. We decide the best model using `which.min(MODEL$validation$PRESS)` where `MODEL` is the name of the pcr or plsr model depending on the script.
 
 5. Next we plot the model and save it to a png.
 
