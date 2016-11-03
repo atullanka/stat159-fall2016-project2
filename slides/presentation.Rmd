@@ -5,3 +5,57 @@ date: November 4th 2016
 output: ioslides_presentation
 ---
 
+# Objective
+
+## Overview
+- Purpose: compare different regression models and observe the optimal one for our data
+- Based on the data set and statistical concepts introduced in Chapter 6, **Linear Model Selection and Regularization**, from "An Introduction to Statistical Learning" (by James et al.)
+
+## Original Data
+- Data from Credit.csv and consists of many variables
+	- qualitative variables: gender, student, status, and ethnicity
+	- quantitative variables: balance, age, cards, education, income, limit, and rating
+
+## Scaled Data
+- standardized version of the original credit data set 
+- we performed mean centering and standardizing(mean zero and sd is one) 
+- sclaed data because glmnet(), used for 2 of our regressions, does not take factors as data
+- created a train and test set using this set
+
+# Regression Models
+
+## Why did we look at so many models?
+- Improve accuracy
+- Different models are optimal for different data sets
+
+## OLS
+- lm() where the y variable is Balance and the x variable is the combination of the the rest of the variables
+-  insert figure for OLS
+
+## Ridge Regression
+- shrinkage method
+- run cv.glmnet, which performs a 10-fold cross validation
+- outputs intercept term and standardizes the variables by default
+- We used a range of values for lambda and set intercept = FALSE and standardize = FALSE because of our prescaled data
+- Choose the best model based on the minimum lambda and plot this model for visualization purposes
+- calculate MSE using testing set
+- Perform regression on full data set
+
+## Lasso Regression
+- also a shrinkage method
+- same exact process as ridge, except in cv.glmnet, set alpha = 1
+
+## PCR
+- dimension reduction method
+- run pcr() from library pls using arguements Balance ~ ., data=train_set, validation = CV and scale = TRUE
+- next we decide the best model by finding the smallest lambda
+- We plot the model
+- Calculate MSE using the testing set
+- Perform regression on full data set
+
+## PLSR
+- another dimension reduction method
+- same process as PCR, but we use plsr() isntead of pcr()
+
+# Results
+
