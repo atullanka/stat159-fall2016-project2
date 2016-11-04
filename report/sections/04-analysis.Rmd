@@ -3,7 +3,7 @@ output: pdf_document
 ---
 
 ```{r,echo=FALSE, message=FALSE}
-# Settings
+
 options(xtable.comment = FALSE)
 options(knitr.comment = FALSE)
 library(glmnet)

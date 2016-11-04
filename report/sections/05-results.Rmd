@@ -4,8 +4,6 @@ output: pdf_document
 
 # Results
 
-# 5: Results
-
 In this section we compare the Lasso Regression with Ridge Regression and the Principal Components Regression with Partial Least Squares Regression.
   
 ## Lasso and Ridge Regression

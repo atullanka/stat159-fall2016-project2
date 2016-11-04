@@ -13,8 +13,6 @@ output:
 
 This project is based on the data set and statistical concepts introduced in Chapter 6, **Linear Model Selection and Regularization**, from "An Introduction to Statistical Learning" (by James et al.). The primary objective is to perform mulitple predictive modeling processes applied to the data set *Credit*, as well as learn about the relationship between `Balance` and the rest of the quantitative and qualitative variables. The five models considered are *Ordinary Least Squares*, *Ridge Regression (RR)*, *Lasso Regression (LR)*, *Principal Components Regression (PCR)*, and *Partial Least Squares REgression (PLSR)*. Using cross-validation, the most ideal model is evaluated from their respective Minimum Square Errors on the test sets.
 
-
-
 # Introduction
 
 The primary purpose of this report is to determine the best model for predicting `Balance` given the ten different predictors, both quantitative and qualitative from the *Credit* data set. The distributions of these variables will be examined through summaries and plots, and five aforementioned regression models will be applied to the data (*Ridge Regression (RR)*, *Lasso Regression (LR)*, *Principal Components Regression (PCR)*, and *Partial Least Squares REgression (PLSR)*). The means of comparing and analyzing five models will be by studying their respective coefficients and  mean squared errors (MSE) calculated from the 10-fold cross-validation. 
@@ -96,9 +94,108 @@ Our next two methods, Principal Components(PCR) and Partial Least Squares regres
 
 7. Finally we refit the model to the **scaled_data.csv** which is our entire data set using the lambda from step 4. We save the coefficient estimates and use it in the *Results* section of the report. 
 
+# Analysis
 
-analysis....need to read the book for this
-results...what happened??
+In the section,we first generate training and test sets of data, randomization seed establishment, parameter choosing via cross-validation and model fitting for each of the methods in order to study the accuracy of fit for each model
 
+## Exploratory Data Analysis
+To look at the basic statistical distributions and summaries of all the variables, the folder `Data` contains all the `.Rdata` and `.txt` files created from the R scripts. Furthermore, relevant plots such as histograms, boxplots, barplots, and conditional boxplots are created that can be accessed in the `Images` folder. Finally, the ANOVA tests were performed using the `aov()` function.
 
-what can we take from this??
+## Pre-modeling Data Processing
+Two major processing steps are done before the models are created:
+
+1. Converting the factors into dummy variables:
+    
+    Transforming the categorizal variables into dummy variables in order to use the built-in function *glmnet* to fit the data.
+    
+2. Mean centering and standardization
+    
+    By doing so, we make sure that the coefficients would function properly and in an equivalent manner
+    
+## Ordinary Least Squares Regression (OLS)
+```{r,echo=FALSE,message=FALSE}
+load('../../data/OLS_regression.RData')
+print(ols_mse)
+```
+We first fit the Ordinary Least Squares Regression model to the data set, with no parameters to be tuned, using hte `lm()` function. The mean square error of the OLS model on the test set is shown above: 0.04468304. We use this as a reference point when comparing with other prediction models.
+
+## Ridge Regression (RR)
+We fit the Ridge Regression model to the training set. Firstly, we need to train the model for the best parameter $\lambda$ via cross-validation (`cv.glmet`). Using `predict()` and calling the library package ` *glment* ` to perform the regression, we get the following:
+
+```{r,echo=FALSE,message=FALSE}
+load('../../data/ridge-regression.RData')
+print(lambda_min_ridge)
+print(ridge_MSE)
+```
+
+From the graph above, we choose the best $\lambda$ given this traning set, which is 0.01 and applied it to the entire data set
+
+The resulting mean square error for the same test set is given above. The 0.05264759 is larger compared to the OLS Regression's 0.04468304.
+
+## Lasso Regression (LR)
+
+We fit the Lasso Regression model to the training set using the same method, but the difference is that the alpha variable in the function `cv.glmnet()` is changed from 0 to 1. 
+```{r,echo=FALSE,message=FALSE}
+load('../../data/lasso.RData')
+print(best_lambda)
+print(test_mse)
+```
+
+From the graph above, we choose the best $\lambda$ given this traning set, which is also 0.01 and applied it to the entire data set.
+
+The resulting mean square error for the same test set is given above. The 0.05406075 does show a slight deterioration compared to the OLS Regression's 0.04468304.
+
+## Principal Components Regression (PCR)
+We  fit the Principal Components Regression to the training set by installing the library package `pls` and using the function `pcr()` to run the cross-validation using the opitimal lambda.
+
+From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 11$ component are used. Therefore, we compute the test MSE:
+
+```{r,echo=FALSE, message=FALSE}
+load('../../data/pc-regression.RData')
+print(pcr_MSE)
+```
+
+The resulting mean square error for the same test set is given above. The 0.05198999 is slightly higher than the the OLS Regression's 0.04468304, but lower than Lasso. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+
+## Partial Least Squares Regression (PLSR)
+We  fit the Partial Least Squares Regression to the training set by installing the same library package `pcr` and using the function `plsr()` to run the cross-validation using the opitimal lambda or tuning parameter.
+
+From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 4$ component are used. Therefore, we compute the test MSE:
+
+```{r,echo=FALSE, message=FALSE}
+load('../../data/plsr_regression.RData')
+print(mse)
+```
+
+The resulting mean square error for the same test set is given above: 0.05173802 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+
+So, apart from the OLS Regression's MSE, the PLSR regression's MSE is the smallest from the 4 other methods. 
+
+# Results
+
+In this section we compare the Lasso Regression with Ridge Regression and the Principal Components Regression with Partial Least Squares Regression.
+  
+## Lasso and Ridge Regression
+    Below are the analogous plots for LR and RR. These plots compare log(lambda) values to MSEP.
+
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../../images/ridge_plots.png")
+knitr::include_graphics("../../images/Lasso_regression_MSE.png")
+``` 
+
+The lambda values in LR and RR determine to what extent the Ridge and Lasso Regression models shrink the effect of regression coefficients. This shrinkage subsequently influences the MSEP errors as seen in the plots. We can note that lasso regression works best with very small lambda values (breaks in the plot) while ridge regression increases in error gradually (continuity). Since Lasso only uses a subset of the coefficient vector while Ridge does not, Lasso involves fewer predictive elements and so a larger tuning (lambda) values would more heavily influence the prediction, and thus the MSE.   
+    
+## PCR and PLSR
+
+Below are the plots for cross-validation for PCR and PLSR. They compare the number of components used to the cross-validation MSE (MSEP). 
+    
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../../images/pcr_plot.png")
+knitr::include_graphics("../../images/plsr_regression_validationplot.png")
+``` 
+
+How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error since the lines are further apart for PCR. However, overall, PLSR minimizes error (MSEP) using fewer components than does PCR, and so there is a potential tradeoff in uncertainty (or error).
+    
+# Conclusions
+
+The primary goal of this project was to develop regression methods for minimizing MSE on the data sets. Each regression model would optimize the MSE differently. While PCR and PSLR are more heavily rooted in components, LR and RR also distinguish each other through subsetting the predictive elements used for modeling. Overall, from the results, we see that the ordinary least squares regression model attains the lowest mean squared error overall, and the partial least squares regression model yields the lowest MSE of the 4 other regression models. Therefore we conclude that the ordinary least squares model is still the most accurate predictor for Balance from the 10 predictors.
