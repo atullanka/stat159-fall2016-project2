@@ -1,7 +1,7 @@
 library(glmnet)
 
-load("../../data/train_test.RData")
-scaled_data <- read.csv("../../data/scaled-credit.csv")[, -1]
+load("data/train_test.RData")
+scaled_data <- read.csv("data/scaled-credit.csv")[, -1]
 
 scaled_x = model.matrix(Balance ~ ., scaled_data)[,-1]
 scaled_y = scaled_data$Balance
@@ -23,7 +23,7 @@ cv_out = cv.glmnet(train_x, train_y, alpha=1,
 best_lambda = cv_out$lambda.min
 
 # Save plot for cross-validation errors in terms of the tuning parameter (lambda)
-png(filename="../../images/Lasso_regression_MSE.png", width = 800, height = 600)
+png(filename="images/Lasso_regression_MSE.png", width = 800, height = 600)
 plot(cv_out)
 dev.off()
 
@@ -40,11 +40,11 @@ lasso_out = glmnet(scaled_x, scaled_y, alpha=1, lambda=best_lambda)
 lasso_coef = predict(lasso_out,type="coefficients",s=best_lambda)[1:12,]
 
 # Save cross validation output, best lambda, mse, and coefficients to RData file
-save(cv_out, best_lambda, test_mse, lasso_coef, file="../../data/lasso.RData")
+save(cv_out, best_lambda, test_mse, lasso_coef, file="data/lasso.RData")
 
 # Write coefficients, best lambda, and mse to a text file
 library(pander)
-sink("../../data/Lasso_regression.txt")
+sink("data/Lasso_regression.txt")
 pander(lasso_coef)
 "TestMSE:"
 test_mse
