@@ -1,6 +1,6 @@
 .PHONY: data eda regressions report shiny clean all 
 
-all: eda data regressions report slides 
+all: eda data regressions report slides session-info 
 
 data:
 	curl -o data/Credit.csv http://www-bcf.usc.edu/~gareth/ISL/Credit.csv
