@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 
 # Results
 
@@ -24,5 +27,5 @@ knitr::include_graphics("../../images/pcr_plot.png")
 knitr::include_graphics("../../images/plsr_regression_validationplot.png")
 ``` 
 
-#######How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error  since the lines are further apart for PCR. However, overall, PLSR appears to minimize error (MSEP) using fewer components than does PCR, and the MSE is actually larger. The tradeoff between PCR and PLSR is that PLSR requires fewer components to attain a low error, but it is thus more uncertain when applied to different data sets.
+How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error since the lines are further apart for PCR. However, overall, PLSR minimizes error (MSEP) using fewer components than does PCR, and so there is a potential tradeoff in uncertainty (or error).
     
