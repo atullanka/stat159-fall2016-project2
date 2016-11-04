@@ -12,7 +12,7 @@ ols:
 	Rscript code/scripts/ols_regression.R
 
 ridge: 
-	Rscript code/script/ridge-script.R
+	Rscript code/scripts/ridge-script.R
 
 lasso:
 	Rscript code/scripts/lasso_regression.R 
