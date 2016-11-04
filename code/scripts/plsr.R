@@ -15,7 +15,7 @@ pls_fit = plsr(Balance ~ ., data=train_set,scale=TRUE, validation="CV")
 min.comp = which.min(pls_fit$validation$PRESS)
 
 # Save validation plot to png file
-png(filename="images/plsr_regression_validationplot.png")
+png(filename="images/Plsr_validationplot.png")
 validationplot(pls_fit, val.type="MSEP")
 dev.off()
 
@@ -28,11 +28,11 @@ pls_out = plsr(Balance ~ ., data=scaled_data ,scale=TRUE,ncomp=min.comp)
 coeff = pls_out$coefficients[, , min.comp]
 
 # Save output objects to RData file
-save(pls_fit, min.comp, mse, coeff, file="data/plsr_regression.RData")
+save(pls_fit, min.comp, mse, coeff, file="data/PLSR.RData")
 
 # Write coefficients, best number of components, and mse to a text file
 library(pander)
-sink("data/plsr_regression.txt")
+sink("data/PLSR.txt")
 pander(coeff)
 cat("\nTest MSE:\n")
 mse

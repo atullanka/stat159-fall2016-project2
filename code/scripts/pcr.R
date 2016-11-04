@@ -22,7 +22,7 @@ pcr_fit <- pcr(Balance ~ ., data = train_set, scale = TRUE, validation = 'CV')
 lambda_min_pcr <- which.min(pcr_fit$validation$PRESS)
 
 # Plot pcr regression
-png('images/pcr_plot.png')
+png('images/pcr_validationplot.png')
 validationplot(pcr_fit, val.type = 'MSEP')
 dev.off()
 
@@ -35,10 +35,10 @@ pcr_full <- pcr(Balance ~ ., data = scaled_credit, ncomp = lambda_min_pcr, valid
 pcr_coef_full <- coef(pcr_full)
 	 
 # Save data in an Rdata file to be loaded later in the project
-save(lambda_min_pcr, pcr_fit, pcr_MSE, pcr_coef_full,file = 'data/pc-regression.RData')
+save(lambda_min_pcr, pcr_fit, pcr_MSE, pcr_coef_full,file = 'data/PCR.RData')
 	 
 # Save useful statstics(and labels!) in a text file, to be used in report 
-sink('data/pc-regression-output.txt')
+sink('data/PCR.txt')
 cat('Output of PCR with 10-fold CV on the Full Data Set\n')
 print(summary(pcr_fit))
 cat('\nMinimum Lambda for PCR\n')
