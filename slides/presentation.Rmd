@@ -4,6 +4,13 @@ author: Atul Lanka and Rushil Sheth
 date: November 4th 2016
 output: ioslides_presentation
 ---
+```{r,echo=FALSE, message=FALSE}
+
+options(xtable.comment = FALSE)
+options(knitr.comment = FALSE)
+library(glmnet)
+library(pls)
+```
 
 # Objective
 
@@ -42,12 +49,16 @@ output: ioslides_presentation
 - Perform regression on full data set
 
 ## Ridge Regression Image
-- add figure
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../images/ridge_plots.png")
+``` 
 
 ## Lasso Regression
 - also a shrinkage method
 - same exact process as ridge, except in cv.glmnet, set alpha = 1
-- add figure 
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../images/Lasso_regression_MSE.png")
+```  
 
 ## PCR
 - dimension reduction method
@@ -58,12 +69,16 @@ output: ioslides_presentation
 - Perform regression on full data set
 
 ## PCR image
--add PCR image
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../images/pcr_plot.png")
+``` 
 
 ## PLSR
 - another dimension reduction method
 - same process as PCR, but we use plsr() isntead of pcr()
-- add PLSR image
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("../images/plsr_regression_validationplot.png")
+``` 
 
 # Results
 - compare models
