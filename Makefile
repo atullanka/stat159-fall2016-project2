@@ -24,6 +24,7 @@ plsr:
 	Rscript code/scripts/plsr_regression.R
 
 session-info:
+	bash session-info.sh 
 	Rscript code/scripts/session.info.R
 
 regressions:
