@@ -19,6 +19,8 @@ y <- as.double(train_set$Balance)
 # Ridge regression utilizes a variable lambda which can vary in size, so we make a vector modeling this
 grid <- 10^seq(10, -2, length = 100)
 
+ridge_mod = glmnet(model.matrix(Balance ~ ., train_set)[,-1], train_set$Balance, alpha=0, lambda= grid)
+
 set.seed (12345)
 
 # Create ridge object using glmnet and grid for lambda arguemnet
@@ -35,8 +37,8 @@ plot(cv_ridge_models)
 dev.off()
 
 # Calculate MSE
-ridge_matrix_test <- as.matrix(test_set[ ,-12])
-ridge_predict <- predict(cv_ridge_models,ridge_matrix_test, s = lambda_min_ridge)
+ridge_matrix_test <- model.matrix(Balance ~ ., test_set)[,-1]
+ridge_predict <- predict(ridge_mod,newx = ridge_matrix_test, s = lambda_min_ridge)
 ridge_MSE <- mean((ridge_predict - test_set$Balance)^2)
 
 # Find coeff for best value

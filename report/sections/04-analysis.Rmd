@@ -46,7 +46,7 @@ print(ridge_MSE)
 
 From the graph above, we choose the best $\lambda$ given this traning set, which is 0.01 and applied it to the entire data set
 
-The resulting mean square error for the same test set is given above. The #####0.04611172 does show an improvment compared to the OLS Regression's 0.04468304.
+The resulting mean square error for the same test set is given above. The 0.05264759 is larger compared to the OLS Regression's 0.04468304.
 
 ## Lasso Regression (LR)
 
