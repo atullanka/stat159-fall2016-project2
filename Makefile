@@ -1,6 +1,6 @@
 .PHONY: data eda regressions report shiny clean all 
 
-all: eda regressions report
+all: eda regressions report slides shiny
 
 data:
 	curl -o data/Credit.csv http://www-bcf.usc.edu/~gareth/ISL/Credit.csv
@@ -36,14 +36,11 @@ regressions:
 
 report: report/00-abstract.Rmd report/01-introduction.Rmd report/02-data.Rmd report/03-methods.Rmd report/04-analysis.Rmd report/05-results.Rmd report/06-conclusions.Rmd
 	cat report/00-abstract.Rmd report/01-introduction.Rmd report/02-data.Rmd report/03-methods.Rmd report/04-analysis.Rmd report/05-results.Rmd report/06-conclusions.Rmd > report/report.Rmd
-	pandoc report/report.Rmd -s -o report/report.pdf 
+	Rscript -e 'library(rmarkdown); render("../report.Rmd")'
 
 
 slides:
 	#need slides code
-
-session:
-	Rscript code/scripts/session-info-script.R
 
 shiny:
 	R -e "shiny::runApp('shiny/app.R')"
