@@ -70,7 +70,7 @@ library(pls)
 
 ## PCR image
 <div class="columns-2">
-  <img src="../images/pcr_validationplot.png" alt="PCR Validation Plot" height="400" width="400">
+  <img src="../images/Pcr_validationplot.png" alt="PCR Validation Plot" height="400" width="400">
 </div>
 
 ## PLSR
