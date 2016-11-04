@@ -34,8 +34,8 @@ regressions:
 	make pcr
 	make plsr
 
-report: report/00-abstract.Rmd report/01-introduction.Rmd report/02-data.Rmd report/03-methods.Rmd report/04-analysis.Rmd report/05-results.Rmd report/06-conclusions.Rmd
-	cat report/00-abstract.Rmd report/01-introduction.Rmd report/02-data.Rmd report/03-methods.Rmd report/04-analysis.Rmd report/05-results.Rmd report/06-conclusions.Rmd > report/report.Rmd
+report: report/sections/*.Rmd
+	cat report/sections/*.Rmd > report/report.Rmd
 	Rscript -e 'library(rmarkdown); render("report/report.Rmd")'
 
 
