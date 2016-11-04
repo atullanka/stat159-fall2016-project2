@@ -6,6 +6,8 @@ scaled_data <- read.csv("../../data/scaled-credit.csv")[, -1]
 test_x = model.matrix(Balance ~ ., test_set)[,-1]
 test_y = test_set$Balance
 
+set.seed (12345)
+
 # Perform ten-fold cross validation on the training data
 pls_fit = plsr(Balance ~ ., data=train_set,scale=TRUE, validation="CV")
 

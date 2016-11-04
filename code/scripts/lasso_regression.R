@@ -13,6 +13,8 @@ lasso.grid = 10^seq(10,-2,length=100)
 
 lasso_mod = glmnet(train_x, train_y, alpha=1, lambda= lasso.grid)
 
+set.seed (12345)
+
 #Cross-Validation
 cv_out = cv.glmnet(train_x, train_y, alpha=1, 
                    intercept=FALSE, standardize=FALSE, lambda= lasso.grid)
