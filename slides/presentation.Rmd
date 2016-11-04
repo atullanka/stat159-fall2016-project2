@@ -3,7 +3,6 @@ title: "Predictive Modeling Process"
 author: Atul Lanka and Rushil Sheth
 date: November 4th 2016
 output: ioslides_presentation
-  fig_caption: yes
 ---
 ```{r,echo=FALSE, message=FALSE}
 
@@ -50,16 +49,16 @@ library(pls)
 - Perform regression on full data set
 
 ## Ridge Regression Image
-```{r,echo=FALSE,fig.align='center'}
-knitr::include_graphics("../images/ridge_plots.png")
-``` 
+<div class="columns-2">
+  <img src="../images/Ridge_plot.png" alt="Ridge Plot (MSE)" height="400" width="400">
+</div>
 
 ## Lasso Regression
 - also a shrinkage method
 - same exact process as ridge, except in cv.glmnet, set alpha = 1
-```{r,echo=FALSE,fig.align='center'}
-knitr::include_graphics("../images/Lasso_regression_MSE.png")
-```  
+<div class="columns-2">
+  <img src= "../images/Lasso_plot.png" alt="Lasso Plot (MSE)" height="400" width="400">
+</div>
 
 ## PCR
 - dimension reduction method
@@ -70,16 +69,16 @@ knitr::include_graphics("../images/Lasso_regression_MSE.png")
 - Perform regression on full data set
 
 ## PCR image
-```{r,echo=FALSE,fig.align='center'}
-knitr::include_graphics("../images/pcr_plot.png")
-``` 
+<div class="columns-2">
+  <img src="../images/pcr_validationplot.png" alt="PCR Validation Plot" height="400" width="400">
+</div>
 
 ## PLSR
 - another dimension reduction method
 - same process as PCR, but we use plsr() isntead of pcr()
-```{r,echo=FALSE,fig.align='center'}
-knitr::include_graphics("../images/plsr_regression_validationplot.png")
-``` 
+<div class="columns-2">
+  <img src="../images/Plsr_validationplot.png" alt="PCR Validation Plot" height="400" width="400">
+</div>
 
 # Results
 ```{r,echo=FALSE, message=FALSE}

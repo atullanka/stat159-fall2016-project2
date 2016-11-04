@@ -20,7 +20,7 @@ The lambda values in LR and RR determine to what extent the Ridge and Lasso Regr
 Below are the plots for cross-validation for PCR and PLSR. They compare the number of components used to the cross-validation MSE (MSEP). 
     
 ```{r,echo=FALSE,fig.align='center', fig.cap= "Validation plots from PC and PLS regression respectively"}
-knitr::include_graphics("../images/Pcr_validationplot.png")
+knitr::include_graphics("../images/pcr_validationplot.png")
 knitr::include_graphics("../images/Plsr_validationplot.png")
 ``` 
 
