@@ -9,7 +9,7 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 
 * data: This folder contains our main and scaled data set. It also includes the Rdata and text files created by our various methods.
 
-* images: This folder contains our 
+* images: This folder contains our plots and other visual output generated from the data analysis or regression 
 
 * report: This folder contains the sections of the paper, a concatenated paper RMD and a final PDF version of our report 
 
@@ -25,6 +25,36 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 
 * Makefile: Run make commands to create the regression models, relevant images, Rdata files and text files. We can also produce slides, a report, and a shiny app.
 
+**Makefile commands**
+
+The *Makefile* commands can be run individually in order to expedite the reproduction process:
+
+* ```all```: produce the entire project from scratch
+
+* ```data```: will download the *Credit.csv* file 
+
+* ```eda```: will perform the exploratory data analysis
+
+* ```ols```: will perform the Ordinary Linear Regression (OLS)
+
+* ```ridge```: will perform the Ridge Regression (RR)
+
+* ```lasso```: will perform the Lasso Regression (LR)
+
+* ```pcr```: will perform the Principal Components Regression (PCR)
+
+* ```plsr```: will perform the Partial Least Squares Regression (PLSR)
+
+* ```regressions```: will perform all five types of regressions
+
+* ```report```: will generate the *report.pdf* file from the .Rmd sections
+
+* ```slides```: will generate the *slides.html*
+
+* ```session```:  will generate the *session-info.txt* file
+
+* ```clean```: will delete the generated pdf report
+
 
 **How to reproduce our project**:
 
@@ -32,13 +62,9 @@ Overview: This project looks at the difference and the optimality of the ridge, 
 
 2. Remove our most recent report which is inlcuded in repo. To do this type `make clean`
 
-3. Next, run the various scripts in order to have the most up to date data: NOT SURE THE ORDER OF COMMANDS
+3. Next, in order to download the data and run the various scripts necessary for the report and the slides, type `make all`. This will run all the regressions and ouptut both the report and the slides.
 
-4. Now you can generate the report! Type the command `make report`
-
-5. And now you can run `make slides` and generate the slides.
-
-6. Finally if you want an interactive view of the different regression models you can run `make shiny`
+4. Finally if you want an interactive view of the different regression models you can run `make shiny`
 
 	a. A command similar to `Listening on http://127.0.0.1:6800` should show up.
 
