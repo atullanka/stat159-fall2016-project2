@@ -1,6 +1,3 @@
----
-output: pdf_document
----
 
 ```{r,echo=FALSE, message=FALSE}
 
@@ -29,8 +26,8 @@ Two major processing steps are done before the models are created:
     By doing so, we make sure that the coefficients would function properly and in an equivalent manner
     
 ## Ordinary Least Squares Regression (OLS)
-```{r,echo=FALSE,message=FALSE}
-load('../data/OLS_regression.RData')
+```{r,echo=FALSE,message=FALSE, fig.cap= "MSE value from OLS regression"}
+load('../data/OLS.RData')
 print(ols_mse)
 ```
 We first fit the Ordinary Least Squares Regression model to the data set, with no parameters to be tuned, using hte `lm()` function. The mean square error of the OLS model on the test set is shown above: 0.04468304. We use this as a reference point when comparing with other prediction models.
@@ -38,8 +35,8 @@ We first fit the Ordinary Least Squares Regression model to the data set, with n
 ## Ridge Regression (RR)
 We fit the Ridge Regression model to the training set. Firstly, we need to train the model for the best parameter $\lambda$ via cross-validation (`cv.glmet`). Using `predict()` and calling the library package ` *glment* ` to perform the regression, we get the following:
 
-```{r,echo=FALSE,message=FALSE}
-load('../data/ridge-regression.RData')
+```{r,echo=FALSE,message=FALSE, fig.cap= "Lambda and MSE value from Ridge regression"}
+load('../data/Ridge.RData')
 print(lambda_min_ridge)
 print(ridge_MSE)
 ```
@@ -51,7 +48,7 @@ The resulting mean square error for the same test set is given above. The 0.0526
 ## Lasso Regression (LR)
 
 We fit the Lasso Regression model to the training set using the same method, but the difference is that the alpha variable in the function `cv.glmnet()` is changed from 0 to 1. 
-```{r,echo=FALSE,message=FALSE}
+```{r,echo=FALSE,message=FALSE, fig.cap= "Lambda and MSE value from Lasso regression"}
 load('../data/lasso.RData')
 print(best_lambda)
 print(test_mse)
@@ -66,8 +63,8 @@ We  fit the Principal Components Regression to the training set by installing th
 
 From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 11$ component are used. Therefore, we compute the test MSE:
 
-```{r,echo=FALSE, message=FALSE}
-load('../data/pc-regression.RData')
+```{r,echo=FALSE, message=FALSE, fig.cap= "MSE value from PC regression"}
+load('../data/PCR.RData')
 print(pcr_MSE)
 ```
 
@@ -78,8 +75,8 @@ We  fit the Partial Least Squares Regression to the training set by installing t
 
 From the validation plot (displayed in the next section), we may find that the lowest cross-validation error occurs when $M = 4$ component are used. Therefore, we compute the test MSE:
 
-```{r,echo=FALSE, message=FALSE}
-load('../data/plsr_regression.RData')
+```{r,echo=FALSE, message=FALSE, fig.cap= "MSE value from PLS regression"}
+load('../data/PLSR.RData')
 print(mse)
 ```
 

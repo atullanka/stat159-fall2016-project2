@@ -3,6 +3,7 @@ title: "Predictive Modeling Process"
 author: Atul Lanka and Rushil Sheth
 date: November 4th 2016
 output: ioslides_presentation
+  fig_caption: yes
 ---
 ```{r,echo=FALSE, message=FALSE}
 
