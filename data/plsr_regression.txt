@@ -16,7 +16,7 @@ Table: Table continues below
 
 
 Test MSE:
-[1] 0.05173802
+[1] 0.05222445
 
 Best Number of Components:
 [1] 5

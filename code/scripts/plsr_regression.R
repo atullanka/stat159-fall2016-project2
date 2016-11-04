@@ -20,7 +20,7 @@ validationplot(pls_fit, val.type="MSEP")
 dev.off()
 
 # Find the test mse
-pls_pred = predict(pls_fit, test_x, ncomp=comp)
+pls_pred = predict(pls_fit, test_x, ncomp=min.comp)
 mse = mean((pls_pred-test_y)^2)
 
 # Find the coefficients for the best value of the number of components
