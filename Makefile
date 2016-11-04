@@ -40,7 +40,7 @@ report: report/sections/*.Rmd
 
 
 slides:
-	Rscript -e 'library(rmarkdown); render("slides/slides.Rmd")'
+	Rscript -e 'library(rmarkdown); render("slides/presentation.Rmd")'
 
 shiny:
 	R -e "shiny::runApp('shiny/app.R')"
