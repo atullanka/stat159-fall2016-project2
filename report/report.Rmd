@@ -104,7 +104,11 @@ options(xtable.comment = FALSE)
 options(knitr.comment = FALSE)
 library(glmnet)
 library(pls)
+library(reshape2)
+library(ggplot2)
+
 ```
+
 
 # Analysis
 
@@ -179,17 +183,38 @@ load('../data/PLSR.RData')
 print(mse)
 ```
 
-The resulting mean square error for the same test set is given above: 0.05173802 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+The resulting mean square error for the same test set is given above: 0.05222445 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
 
-So, apart from the OLS Regression's MSE, the PLSR regression's MSE is the smallest from the 4 other methods. 
+Below is a table that summarizes the MSE values for each regression:
+```{r results= 'asis', echo = FALSE}
+load('../data/OLS.Rdata')
+load('../data/PCR.Rdata')
+load('../data/Lasso.Rdata')
+load('../data/Ridge.Rdata')
+load('../data/PLSR.Rdata')
+library(xtable)
+Regression <- c('OLS','Ridge', 'Lasso', 'PCR', 'PLSR')
+MSE <- c(ols_mse, ridge_MSE, test_mse, pcr_MSE, mse)
+mse_chart <- data.frame(Regression, MSE)
+mse_tbl <- xtable(mse_chart,
+               caption = 'Test MSE Values for the Regression Techniques',
+               digits = 7)
 
+print(mse_tbl, caption.placement = 'top',
+      comment = getOption('xtable.comment', FALSE),
+      include.rownames = FALSE)
+```
+
+
+So, apart from the OLS Regression's MSE, the PC regression's MSE is the smallest from the 4 other methods. 
 
 # Results
 
 In this section we compare the Lasso Regression with Ridge Regression and the Principal Components Regression with Partial Least Squares Regression.
   
 ## Lasso and Ridge Regression
-    Below are the analogous plots for LR and RR. These plots compare log(lambda) values to MSEP.
+
+Below are the analogous plots for LR and RR. These plots compare log(lambda) values to MSEP.
 
 ```{r,echo=FALSE,fig.align='center', fig.cap= "Plotting MSE against lambda values for ridge and lasso regression respectively"}
 knitr::include_graphics("../images/Ridge_plot.png")
@@ -207,8 +232,58 @@ knitr::include_graphics("../images/Pcr_validationplot.png")
 knitr::include_graphics("../images/Plsr_validationplot.png")
 ``` 
 
-How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error since the lines are further apart for PCR. However, overall, PLSR minimizes error (MSEP) using fewer components than does PCR, and so there is a potential tradeoff in uncertainty (or error).
+How the dotted red line fits the solid black line indicates how accurate this regression model is for an arbitrary data set. From the graph, it appears as though PLSR better matches up the expected error with the training set error since the lines are further apart for PCR. However, PLSR minimizes error (MSEP) using fewer components than does PCR, and so there is a potential tradeoff in uncertainty, and hence the MSE is larger for PLSR.
     
+## Additional Plots
+
+```{r, results = "asis", echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center"}
+load('../data/OLS.Rdata')
+load('../data/PCR.Rdata')
+load('../data/Lasso.Rdata')
+load('../data/Ridge.Rdata')
+load('../data/PLSR.Rdata')
+library(xtable)
+
+coef_matrix <- matrix(data = c(as.numeric(OLS_summary$coefficients), 
+                                  as.numeric(ridge_coef_full),
+                                  as.numeric(lasso_coef),0, 
+                                  as.numeric(pcr_coef_full), 0, 
+                                  as.numeric(coeff)), 
+                                  nrow = 12, ncol = 5)
+
+colnames(coef_matrix) <- c('OLS', 'Ridge', 'Lasso', 'PC', 'PLS')
+rownames(coef_matrix) <- c('Intercept', 'Income', 'Limit', 'Rating', 'Cards',
+                           'Age', 'Education', 'GenderFemale', 'StudentYes',
+                           'MarriedYes', 'EthnicityAsian',
+                           'EthnicityCaucasian')
+print(xtable(coef_matrix, caption = 'Regression Coefficients', digits = 4),
+      type = 'latex', comment = FALSE)
+
+```
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.cap= 'Estimated Regression Coefficients by Variable and Regression'}
+
+# create a data frame for plotting coefficients.
+coef_df <- data.frame(type = colnames(coef_matrix), t(abs(coef_matrix)))
+# changing the variable names to show what happened after abs value
+colnames(coef_df) <- c('type', 'Intercept', 'Abs(Income)', 'Limit', 'Rating',
+                       'Cards', 'Abs(Age)', 'Abs(Education)', 
+                       'Abs(GenderFemale)', 'StudentYes', 'MarriedYes', 
+                       'EthnicityAsian','EthnicityCaucasian')
+
+# use fnc melt to make easier to plot in ggplot. 
+coef_tidy <- melt(coef_df, id.vars = 'type')
+
+# change the variable into a factor 
+coef_tidy$type <- factor(coef_tidy$type, levels = coef_tidy$type)
+
+# Plotting the different coefficients in barcharts. 
+ggplot(coef_tidy, aes(type,value))+
+  geom_bar(aes(fill = type), stat = 'identity')+
+  facet_wrap(~variable, scales = 'free')+
+  ggtitle(label = 'Estimated Regression Coefficients by Variable and Regression')
+
+```
 
 # Conclusions
 

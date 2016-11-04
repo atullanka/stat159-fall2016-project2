@@ -82,5 +82,86 @@ knitr::include_graphics("../images/plsr_regression_validationplot.png")
 ``` 
 
 # Results
-- compare models
+```{r,echo=FALSE, message=FALSE}
 
+options(xtable.comment = FALSE)
+options(knitr.comment = FALSE)
+library(glmnet)
+library(pls)
+library(reshape2)
+library(ggplot2)
+
+```
+
+```{r results= 'asis', echo = FALSE}
+load('../data/OLS.Rdata')
+load('../data/PCR.Rdata')
+load('../data/Lasso.Rdata')
+load('../data/Ridge.Rdata')
+load('../data/PLSR.Rdata')
+library(xtable)
+Regression <- c('OLS','Ridge', 'Lasso', 'PCR', 'PLSR')
+MSE <- c(ols_mse, ridge_MSE, test_mse, pcr_MSE, mse)
+mse_chart <- data.frame(Regression, MSE)
+mse_tbl <- xtable(mse_chart,
+               caption = 'Test MSE Values for the Regression Techniques',
+               digits = 7)
+
+print(mse_tbl, caption.placement = 'top',
+      comment = getOption('xtable.comment', FALSE),
+      include.rownames = FALSE)
+```
+
+```{r, results = "asis", echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center"}
+load('../data/OLS.Rdata')
+load('../data/PCR.Rdata')
+load('../data/Lasso.Rdata')
+load('../data/Ridge.Rdata')
+load('../data/PLSR.Rdata')
+library(xtable)
+
+coef_matrix <- matrix(data = c(as.numeric(OLS_summary$coefficients), 
+                                  as.numeric(ridge_coef_full),
+                                  as.numeric(lasso_coef),0, 
+                                  as.numeric(pcr_coef_full), 0, 
+                                  as.numeric(coeff)), 
+                                  nrow = 12, ncol = 5)
+
+colnames(coef_matrix) <- c('OLS', 'Ridge', 'Lasso', 'PC', 'PLS')
+rownames(coef_matrix) <- c('Intercept', 'Income', 'Limit', 'Rating', 'Cards',
+                           'Age', 'Education', 'GenderFemale', 'StudentYes',
+                           'MarriedYes', 'EthnicityAsian',
+                           'EthnicityCaucasian')
+print(xtable(coef_matrix, caption = 'Regression Coefficients', digits = 4),
+      type = 'latex', comment = FALSE)
+
+```
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.cap= 'Estimated Regression Coefficients by Variable and Regression'}
+
+# create a data frame for plotting coefficients.
+coef_df <- data.frame(type = colnames(coef_matrix), t(abs(coef_matrix)))
+# changing the variable names to show what happened after abs value
+colnames(coef_df) <- c('type', 'Intercept', 'Abs(Income)', 'Limit', 'Rating',
+                       'Cards', 'Abs(Age)', 'Abs(Education)', 
+                       'Abs(GenderFemale)', 'StudentYes', 'MarriedYes', 
+                       'EthnicityAsian','EthnicityCaucasian')
+
+# use fnc melt to make easier to plot in ggplot. 
+coef_tidy <- melt(coef_df, id.vars = 'type')
+
+# change the variable into a factor 
+coef_tidy$type <- factor(coef_tidy$type, levels = coef_tidy$type)
+
+# Plotting the different coefficients in barcharts. 
+ggplot(coef_tidy, aes(type,value))+
+  geom_bar(aes(fill = type), stat = 'identity')+
+  facet_wrap(~variable, scales = 'free')+
+  ggtitle(label = 'Estimated Regression Coefficients by Variable and Regression')
+
+```
+
+
+# Conslusions
+- Overall, from the table in previous slide, using OLS yields the lowest MSE
+- From the 4 additional regression methods implemented, PCR yields the lowest MSE

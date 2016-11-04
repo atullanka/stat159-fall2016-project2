@@ -9,31 +9,6 @@ library(reshape2)
 library(ggplot2)
 
 ```
-##Not sure where to put this table
-```{r, results = "asis", echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center"}
-load('../data/OLS.Rdata')
-load('../data/PCR.Rdata')
-load('../data/Lasso.Rdata')
-load('../data/Ridge.Rdata')
-load('../data/PLSR.Rdata')
-library(xtable)
-
-coef_matrix <- matrix(data = c(as.numeric(OLS_summary$coefficients), 
-                                  as.numeric(ridge_coef_full),
-                                  as.numeric(lasso_coef),0, 
-                                  as.numeric(pcr_coef_full), 0, 
-                                  as.numeric(coeff)), 
-                                  nrow = 12, ncol = 5)
-
-colnames(coef_matrix) <- c('OLS', 'Ridge', 'Lasso', 'PC', 'PLS')
-rownames(coef_matrix) <- c('Intercept', 'Income', 'Limit', 'Rating', 'Cards',
-                           'Age', 'Education', 'GenderFemale', 'StudentYes',
-                           'MarriedYes', 'EthnicityAsian',
-                           'EthnicityCaucasian')
-print(xtable(coef_matrix, caption = 'Regression Coefficients', digits = 4),
-      type = 'latex', comment = FALSE)
-
-```
 
 
 # Analysis
@@ -109,6 +84,27 @@ load('../data/PLSR.RData')
 print(mse)
 ```
 
-The resulting mean square error for the same test set is given above: 0.05173802 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
+The resulting mean square error for the same test set is given above: 0.05222445 This too is larger than the OLS Regression's 0.04468304. We also fit the model with the best choice of $M$, the number of components to the entire data set for future purpose.
 
-So, apart from the OLS Regression's MSE, the PLSR regression's MSE is the smallest from the 4 other methods. 
+Below is a table that summarizes the MSE values for each regression:
+```{r results= 'asis', echo = FALSE}
+load('../data/OLS.Rdata')
+load('../data/PCR.Rdata')
+load('../data/Lasso.Rdata')
+load('../data/Ridge.Rdata')
+load('../data/PLSR.Rdata')
+library(xtable)
+Regression <- c('OLS','Ridge', 'Lasso', 'PCR', 'PLSR')
+MSE <- c(ols_mse, ridge_MSE, test_mse, pcr_MSE, mse)
+mse_chart <- data.frame(Regression, MSE)
+mse_tbl <- xtable(mse_chart,
+               caption = 'Test MSE Values for the Regression Techniques',
+               digits = 7)
+
+print(mse_tbl, caption.placement = 'top',
+      comment = getOption('xtable.comment', FALSE),
+      include.rownames = FALSE)
+```
+
+
+So, apart from the OLS Regression's MSE, the PC regression's MSE is the smallest from the 4 other methods. 
