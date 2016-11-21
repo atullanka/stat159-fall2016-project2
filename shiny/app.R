@@ -3,13 +3,13 @@ library (pls)
 library (glmnet)
 
 
-load("../data/lasso.Rdata")
+load("../data/Lasso.Rdata")
 #look for cv_out to plot
-load("../data/pc-regression.Rdata")
+load("../data/PCR.Rdata")
 #validationplot(pcr_fit, val.type = 'MSEP')
-load("../data/plsr_regression.Rdata")
+load("../data/PLSR.Rdata")
 #validationplot(pls_fit, val.type="MSEP")...look for pls_fit
-load("../data/ridge-regression.Rdata")
+load("../data/Ridge.Rdata")
 #look for cv_ridge_models to plot....plot(cv_ridge_models)
 
 
